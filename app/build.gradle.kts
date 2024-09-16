@@ -70,7 +70,7 @@ dependencies {
     implementation(libs.camera.extensions)
 
     // MLKit
-    implementation(libs.text.recognition)
+    implementation(libs.barcode.scanning)
 
     // Accompanist
     implementation(libs.accompanist.permissions)
