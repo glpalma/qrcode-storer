@@ -63,11 +63,11 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.ui.tooling.preview)
 
-    //// CAMERA STUFF ////
-    implementation("androidx.camera:camera-camera2:$camerax_version")
-    implementation("androidx.camera:camera-lifecycle:$camerax_version")
-    implementation("androidx.camera:camera-view:$camerax_version")
-    implementation("androidx.camera:camera-extensions:$camerax_version")
+    // Camera
+    implementation(libs.camera.camera2)
+    implementation(libs.camera.lifecycle)
+    implementation(libs.camera.view)
+    implementation(libs.camera.extensions)
 
     // MLKit
     implementation(libs.text.recognition)
