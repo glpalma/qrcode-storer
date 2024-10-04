@@ -1,6 +1,5 @@
 package com.example.qrcode_storer
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -29,8 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.content.res.ResourcesCompat
-import com.example.qrcode_storer.ui.BottomNavigationTheme
 import com.example.qrcode_storer.ui.MainScreen
 import com.example.qrcode_storer.ui.theme.QrcodestorerTheme
 
@@ -48,79 +45,80 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             QrcodestorerTheme {
-                BottomNavigationTheme {
-                    val items = listOf(
-                        BottomNavigationItem(
-                            title = "Scanner",
-                            selectedIcon = Icons.Filled.Home,
-                            unselectedIcon = Icons.Outlined.Home,
-                            hasNews = false,
-                        ),
-                        BottomNavigationItem(
-                            title = "Favorites",
-                            selectedIcon = Icons.Filled.Favorite,
-                            unselectedIcon = Icons.Outlined.Favorite,
-                            hasNews = false,
-                        ),
-                    )
-                    var selectedItemIndex by rememberSaveable {
-                        mutableIntStateOf(0)
-                    }
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
-                    ) {
-                        Scaffold(
-                            bottomBar = {
-                                NavigationBar {
-                                    items.forEachIndexed { index, item ->
-                                        NavigationBarItem(
-                                            selected = selectedItemIndex == index,
-                                            onClick = {
-                                                selectedItemIndex = index
-                                                // navController.navigate(item.title)
-                                                // TODO: implement navigation
-                                            },
-                                            label = {
-                                                Text(text = item.title)
-                                            },
-                                            alwaysShowLabel = false,
-                                            icon = {
-                                                BadgedBox(
-                                                    badge = {
-                                                        if (item.badgeCount != null) {
-                                                            Badge {
-                                                                Text(text = item.badgeCount.toString())
-                                                            }
-                                                        } else if (item.hasNews) {
-                                                            Badge()
+                val items = listOf(
+                    BottomNavigationItem(
+                        title = "Scanner",
+                        selectedIcon = Icons.Filled.Home,
+                        unselectedIcon = Icons.Outlined.Home,
+                        hasNews = false,
+                    ),
+                    BottomNavigationItem(
+                        title = "Favorites",
+                        selectedIcon = Icons.Filled.Favorite,
+                        unselectedIcon = Icons.Outlined.Favorite,
+                        hasNews = false,
+                    ),
+                )
+                var selectedItemIndex by rememberSaveable {
+                    mutableIntStateOf(0)
+                }
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    Scaffold(
+                        bottomBar = {
+                            NavigationBar {
+                                items.forEachIndexed { index, item ->
+                                    NavigationBarItem(
+                                        selected = selectedItemIndex == index,
+                                        onClick = {
+                                            selectedItemIndex = index
+                                            // navController.navigate(item.title)
+                                            // TODO: implement navigation
+                                        },
+                                        label = {
+                                            Text(text = item.title)
+                                        },
+                                        alwaysShowLabel = false,
+                                        icon = {
+                                            BadgedBox(
+                                                badge = {
+                                                    if (item.badgeCount != null) {
+                                                        Badge {
+                                                            Text(text = item.badgeCount.toString())
                                                         }
+                                                    } else if (item.hasNews) {
+                                                        Badge()
                                                     }
-                                                ) {
-                                                    Icon(
-                                                        imageVector = if (index == selectedItemIndex) {
-                                                            item.selectedIcon
-                                                        } else item.unselectedIcon,
-                                                        contentDescription = item.title
-                                                    )
                                                 }
+                                            ) {
+                                                Icon(
+                                                    imageVector = if (index == selectedItemIndex) {
+                                                        item.selectedIcon
+                                                    } else item.unselectedIcon,
+                                                    contentDescription = item.title
+                                                )
                                             }
-                                        )
-                                    }
+                                        }
+                                    )
                                 }
                             }
-                        ) { padding ->
-
-                            Surface(
-                                modifier = Modifier.fillMaxSize().padding(padding),
-                                color = MaterialTheme.colorScheme.background
-                            ) {
-                                MainScreen()
-                            }
-
                         }
+                    ) { padding ->
+
+                        Surface(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(padding),
+                            color = MaterialTheme.colorScheme.background
+                        ) {
+                            MainScreen()
+                        }
+
                     }
                 }
+
 
             }
         }
