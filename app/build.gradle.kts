@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.ui.tooling.preview)
+    implementation(libs.androidx.navigation.compose)
 
     // Camera
     implementation(libs.camera.camera2)
