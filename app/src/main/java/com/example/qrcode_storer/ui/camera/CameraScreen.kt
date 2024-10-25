@@ -14,9 +14,11 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,11 +47,38 @@ fun CameraContent() {
     val lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
     val cameraController: LifecycleCameraController = remember { LifecycleCameraController(context) }
     var detectedContent: String by remember { mutableStateOf("No QRCode detected yet..") }
+    var showDiscardOrSaveDialog by remember { mutableStateOf(false) }
+
 
     fun onCodeUpdated(updatedContent: String) {
-        detectedContent = updatedContent
+        if (updatedContent != "") {
+            detectedContent = updatedContent
+            showDiscardOrSaveDialog = true
+        }
     }
 
+
+    if (showDiscardOrSaveDialog) {
+        AlertDialog(
+            onDismissRequest = { showDiscardOrSaveDialog = false },
+            title = {
+                Text(text = "A code has been detected!")
+            },
+            text = {
+                Text("Do you want to discard it or save it?")
+            },
+            confirmButton = {
+                TextButton(onClick = { showDiscardOrSaveDialog = false }) {
+                    Text("Save")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDiscardOrSaveDialog = false }) {
+                    Text("Discard")
+                }
+            }
+        )
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),

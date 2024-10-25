@@ -121,9 +121,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable("scanner") { MainScreen() }
                         composable("favorites") { FavoritesScreen() }
-
                     }
-
                 }
             }
         }
