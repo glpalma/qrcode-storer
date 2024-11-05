@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.devtools.ksp") version "2.0.21-1.0.25"
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -52,6 +54,7 @@ android {
 
 dependencies {
 
+    // UI
     implementation(libs.material3)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -76,7 +79,12 @@ dependencies {
     // Accompanist
     implementation(libs.accompanist.permissions)
 
+    // Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler) // annotationProcessor
+    implementation(libs.androidx.room.ktx)
 
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

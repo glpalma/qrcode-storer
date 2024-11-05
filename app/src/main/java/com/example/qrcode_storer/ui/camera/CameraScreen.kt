@@ -33,6 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.qrcode_storer.ui.favorites.FavoritesViewModel
 
 @Composable
 fun CameraScreen() {
@@ -46,9 +48,9 @@ fun CameraContent() {
     val context: Context = LocalContext.current
     val lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
     val cameraController: LifecycleCameraController = remember { LifecycleCameraController(context) }
-    var detectedContent: String by remember { mutableStateOf("No QRCode detected yet..") }
+    var detectedContent: String by remember { mutableStateOf("") }
     var showDiscardOrSaveDialog by remember { mutableStateOf(false) }
-
+    val favoritesViewModel: FavoritesViewModel = viewModel(factory = FavoritesViewModel.Factory)
 
     fun onCodeUpdated(updatedContent: String) {
         if (updatedContent != "") {
@@ -68,7 +70,10 @@ fun CameraContent() {
                 Text("Do you want to discard it or save it?")
             },
             confirmButton = {
-                TextButton(onClick = { showDiscardOrSaveDialog = false }) {
+                TextButton(onClick = {
+                    showDiscardOrSaveDialog = false
+                    favoritesViewModel.insertCode(detectedContent)
+                }) {
                     Text("Save")
                 }
             },
