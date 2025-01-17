@@ -10,7 +10,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.qrcode_storer"
+        applicationId = "com.example.qrcode_reader"
         minSdk = 28
         targetSdk = 34
         versionCode = 1

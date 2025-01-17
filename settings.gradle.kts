@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "qrcode-storer"
+rootProject.name = "qrcode-reader"
 include(":app")
  
